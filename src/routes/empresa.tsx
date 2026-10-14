@@ -1,0 +1,11 @@
+import { createFileRoute } from '@tanstack/react-router';
+import { Leaf, Ruler, ShieldCheck } from 'lucide-react';
+import { PageIntro, QuoteBand } from '@/components/site';
+import { pageHead } from '@/lib/silbeyer';
+import warehouse from '@/assets/warehouse.jpg';
+
+export const Route = createFileRoute('/empresa')({ head: () => pageHead('A Silbeyer | Compromisso com Sua Carga', 'Conheça a Silbeyer Embalagens de Madeira, em Embu-Guaçu/SP. Projetos sob medida, madeira de reflorestamento e soluções para indústria e exportação.'), component: Company });
+
+function Company() {
+  return <main><PageIntro eyebrow="A Silbeyer" title="Resistência por natureza. Confiança por compromisso." description="Embalagens pensadas para proteger seus produtos e acompanhar o crescimento do seu negócio." /><section className="container company-section"><div className="company-image"><img src={warehouse} alt="Embalagens de madeira em ambiente industrial — imagem ilustrativa" width={1920} height={1024} /><span>Imagem ilustrativa</span></div><div className="company-copy"><span className="eyebrow">QUEM SOMOS</span><h2>Conhecimento técnico.<br />Soluções de verdade.</h2><div><p>A Silbeyer Embalagens de Madeira atua no desenvolvimento de embalagens e artefatos de madeira para o mercado nacional e de exportação. Nossa base está em Embu-Guaçu, São Paulo.</p><p>Fabricamos caixas de madeira maciça e compensado, pallets e engradados industriais de acordo com as características de cada carga. Peso, dimensões e necessidades de transporte orientam o projeto.</p><p>Trabalhamos com madeira de reflorestamento, como pinus e eucalipto, e oferecemos tratamento fitossanitário conforme a NIMF 15 / IPPC para operações de exportação.</p></div></div><div className="values-grid">{[{ icon: ShieldCheck, title: 'Segurança da carga', text: 'Estruturas desenvolvidas para proteger seus produtos no armazenamento e transporte.' }, { icon: Ruler, title: 'Projeto sob medida', text: 'Soluções alinhadas às dimensões e necessidades reais da sua operação.' }, { icon: Leaf, title: 'Origem responsável', text: 'Madeira de reflorestamento para unir resistência e responsabilidade ambiental.' }].map(value => <div key={value.title}><value.icon size={30} /><h3>{value.title}</h3><p>{value.text}</p></div>)}</div></section><QuoteBand /></main>;
+}

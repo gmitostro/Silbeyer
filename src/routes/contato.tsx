@@ -1,0 +1,24 @@
+import { createFileRoute } from '@tanstack/react-router';
+import { useState } from 'react';
+import { z } from 'zod';
+import { Phone, Mail, MapPin, MessageCircle, ArrowUpRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { PageIntro, WhatsAppButton } from '@/components/site';
+import { contact, pageHead, whatsappUrl } from '@/lib/silbeyer';
+
+export const Route = createFileRoute('/contato')({ head: () => pageHead('Contato e Orçamento | Silbeyer Embalagens', 'Solicite um orçamento pelo WhatsApp (11) 97411-8136. Telefone (11) 4661-3191, vendas@silbeyer.com.br. Silbeyer em Embu-Guaçu/SP.'), component: Contact });
+const schema = z.object({ name: z.string().trim().min(2, 'Informe seu nome.').max(100), company: z.string().trim().max(150), product: z.string().min(1, 'Escolha um produto.'), quantity: z.string().trim().max(50), details: z.string().trim().max(1500) });
+
+function Contact() {
+  const [error, setError] = useState('');
+  function submit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const result = schema.safeParse(Object.fromEntries(new FormData(event.currentTarget)));
+    if (!result.success) { setError(result.error.issues[0]?.message ?? 'Confira os campos.'); return; }
+    setError('');
+    const data = result.data;
+    const message = `Olá! Vim pelo site da Silbeyer e gostaria de um orçamento.\nNome: ${data.name}\n${data.company ? `Empresa: ${data.company}\n` : ''}Produto: ${data.product}\n${data.quantity ? `Quantidade: ${data.quantity}\n` : ''}${data.details ? `Medidas e detalhes: ${data.details}` : ''}`;
+    window.open(whatsappUrl(message), '_blank', 'noopener,noreferrer');
+  }
+  return <main><PageIntro eyebrow="Contato e orçamento" title="Vamos encontrar a sua solução." description="Fale diretamente com nossa equipe comercial ou envie os detalhes do seu projeto pelo WhatsApp." /><section className="container contact-section"><div className="contact-details"><span className="eyebrow">FALE COM A SILBEYER</span><h2>Uma conversa.<br />Muitas possibilidades.</h2><WhatsAppButton>Conversar no WhatsApp</WhatsAppButton><div className="contact-item"><Phone /><div><h3>Telefone</h3><a href="tel:+551146613191">{contact.phone}</a></div></div><div className="contact-item"><MessageCircle /><div><h3>WhatsApp comercial</h3><a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">{contact.whatsapp}</a></div></div><div className="contact-item"><Mail /><div><h3>E-mails</h3>{contact.emails.map(email => <a key={email} href={`mailto:${email}`}>{email}</a>)}</div></div><div className="contact-item"><MapPin /><div><h3>Localização</h3><p>{contact.address}<br />{contact.neighborhood}</p><a className="text-link" href="https://www.google.com/maps/search/?api=1&query=Rua+Leonardo+Scacciotti+Neto+150+Embu+Guaçu+SP" target="_blank" rel="noopener noreferrer">Ver no Google Maps<ArrowUpRight size={16} /></a></div></div></div><form className="quote-form" onSubmit={submit}><span className="eyebrow">SEU PROJETO COMEÇA AQUI</span><h2>Solicite seu orçamento</h2><div className="form-field"><label htmlFor="name">Seu nome *</label><input id="name" name="name" autoComplete="name" placeholder="Como podemos chamar você?" required minLength={2} maxLength={100} /></div><div className="form-field"><label htmlFor="company">Empresa</label><input id="company" name="company" autoComplete="organization" placeholder="Nome da sua empresa" maxLength={150} /></div><div className="form-row"><div className="form-field"><label htmlFor="product">Produto *</label><select id="product" name="product" required defaultValue=""><option value="" disabled>Selecione</option>{['Caixas de madeira maciça', 'Caixas de compensado', 'Pallets de 2 entradas', 'Pallets de 4 entradas', 'Engradados industriais', 'Tratamento NIMF 15 / IPPC', 'Projeto personalizado'].map(item => <option key={item}>{item}</option>)}</select></div><div className="form-field"><label htmlFor="quantity">Quantidade</label><input id="quantity" name="quantity" placeholder="Ex.: 100 unidades" maxLength={50} /></div></div><div className="form-field"><label htmlFor="details">Medidas e detalhes da carga</label><textarea id="details" name="details" rows={4} maxLength={1500} placeholder="Conte sobre as dimensões, o peso e o que você precisa proteger." /></div>{error && <p role="alert" className="text-destructive">{error}</p>}<Button type="submit" className="quote-button form-submit"><MessageCircle size={18} />Enviar pelo WhatsApp<ArrowUpRight size={17} /></Button><p className="form-note">Você será direcionado ao WhatsApp para conversar com nossa equipe. Nenhum dado é armazenado neste site.</p></form></section></main>;
+}

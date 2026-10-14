@@ -1,24 +1,16 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from '@tanstack/react-router';
+import { ArrowRight, ArrowUpRight, Check, Globe2, Leaf } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { WhatsAppButton, ProductCard, QuoteBand, benefits } from '@/components/site';
+import { featuredProducts, pageHead } from '@/lib/silbeyer';
+import warehouse from '@/assets/warehouse.jpg';
+import crates from '@/assets/crates.jpg';
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute('/')({
+  head: () => pageHead('Silbeyer | Embalagens de Madeira Sob Medida', 'Caixas de madeira, pallets e engradados industriais em Embu-Guaçu/SP. Madeira de reflorestamento e tratamento NIMF 15 / IPPC. Peça seu orçamento.'),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
+  return <main><section className="home-hero"><img className="hero-image" src={warehouse} alt="Embalagens de madeira, caixas e pallets em ambiente industrial — imagem ilustrativa" width={1920} height={1024} fetchPriority="high" /><div className="hero-shade" /><div className="container hero-content"><span className="hero-eyebrow"><span />SOLUÇÕES PARA INDÚSTRIA E EXPORTAÇÃO</span><h1>Silbeyer.<br />Embalagens de madeira<br /><span>para ir mais longe.</span></h1><p>Caixas, pallets e engradados sob medida.<br />A resistência que sua carga precisa, com a<br className="desktop-break" /> confiança que seu negócio merece.</p><div className="hero-actions"><WhatsAppButton>Solicitar orçamento</WhatsAppButton><Button asChild variant="ghost" className="hero-products"><Link to="/produtos">Conhecer produtos<ArrowRight size={18} /></Link></Button></div><div className="hero-note"><Leaf size={16} /><span>Madeira de reflorestamento. Compromisso com o futuro.</span></div></div><div className="hero-side-note">RESISTÊNCIA POR NATUREZA.</div></section><section className="benefits-band"><div className="container benefits-grid">{benefits.map(item => <div className="benefit" key={item.title}><item.icon size={29} strokeWidth={1.5} /><div><h3>{item.title}</h3><p>{item.text}</p></div></div>)}</div></section><section className="products-section"><div className="container"><div className="section-heading"><div><span className="eyebrow">NOSSOS PRODUTOS</span><h2>Cada carga, uma solução.</h2><p>Embalagens que se adaptam à sua necessidade. Não o contrário.</p></div><Button asChild variant="outline" className="view-all"><Link to="/produtos">Ver todos os produtos<ArrowUpRight size={17} /></Link></Button></div><div className="product-grid">{featuredProducts.map(product => <ProductCard key={product.id} product={product} label={product.label} />)}</div><div className="custom-note"><span><Check size={16} />Dimensões, reforços e acabamentos conforme o seu projeto.</span><Link to="/contato">Precisa de uma solução especial?<ArrowRight size={16} /></Link></div></div></section><section className="export-section"><div className="container export-grid"><div className="export-visual"><img src={crates} alt="Engradado industrial de madeira — imagem ilustrativa" width={1024} height={768} loading="lazy" /><div className="export-stamp"><Globe2 size={31} /><div><strong>NIMF 15</strong><span>PADRÃO INTERNACIONAL · IPPC</span></div></div></div><div className="export-copy"><span className="eyebrow">PRONTA PARA CRUZAR FRONTEIRAS</span><h2>Sua carga protegida.<br />Seu negócio sem fronteiras.</h2><p>Embalagens de madeira com tratamento fitossanitário conforme a NIMF 15. A segurança que sua operação de exportação exige, do embarque ao destino.</p><ul><li><Check />Tratamento fitossanitário para exportação</li><li><Check />Conformidade com o padrão NIMF 15 / IPPC</li><li><Check />Madeira de reflorestamento: pinus e eucalipto</li></ul><Button asChild variant="outline"><Link to="/tratamento">Conhecer o tratamento<ArrowUpRight size={17} /></Link></Button></div></div></section><section className="about-preview"><div className="container about-preview-inner"><div><span className="eyebrow">A SILBEYER</span><h2>Mais do que madeira.<br />Compromisso com a sua carga.</h2></div><div><p>Em Embu-Guaçu, São Paulo, unimos conhecimento técnico e atenção aos detalhes para desenvolver embalagens que acompanham o seu negócio. Do projeto à fabricação, cada solução é pensada para o que você precisa proteger.</p><Link to="/empresa" className="text-link">Conheça a Silbeyer<ArrowUpRight size={17} /></Link></div></div></section><QuoteBand /></main>;
 }

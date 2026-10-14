@@ -1,0 +1,13 @@
+import { createFileRoute } from '@tanstack/react-router';
+import { useState } from 'react';
+import { Check, ArrowUpRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { PageIntro, QuoteBand, WhatsAppButton } from '@/components/site';
+import { products, pageHead } from '@/lib/silbeyer';
+
+export const Route = createFileRoute('/produtos')({ head: () => pageHead('Caixas, Pallets e Engradados | Silbeyer', 'Conheça caixas de madeira maciça e compensado, pallets de 2 e 4 entradas e engradados industriais. Solicite uma cotação expressa por WhatsApp.'), component: Products });
+
+function Products() {
+  const [category, setCategory] = useState('Todos');
+  return <main><PageIntro eyebrow="Nossos produtos" title="A proteção certa para cada carga." description="Caixas, pallets e engradados fabricados sob medida. Escolha a solução e converse diretamente com nossa equipe." /><section className="catalog-section container"><div className="catalog-tabs" role="tablist" aria-label="Categorias de produtos">{['Todos', 'Caixas', 'Pallets', 'Engradados'].map(item => <Button key={item} role="tab" aria-selected={category === item} variant={category === item ? 'default' : 'ghost'} onClick={() => setCategory(item)}>{item}</Button>)}</div><div className="catalog-grid">{products.filter(product => category === 'Todos' || category === product.category).map(product => <article className="catalog-card" key={product.id}><img src={product.image} alt={`${product.name} — imagem ilustrativa`} loading="lazy" width={1024} height={768} /><div className="catalog-card-body"><span className="eyebrow">{product.category}</span><h2>{product.name}</h2><p>{product.short}</p><ul>{product.specs.map(spec => <li key={spec}><Check size={15} />{spec}</li>)}</ul><WhatsAppButton message={`Olá! Vim pelo site da Silbeyer e gostaria de um orçamento para ${product.message}. Preciso de ajuda para definir medidas, quantidade e requisitos da carga.`}>Cotar este produto</WhatsAppButton></div></article>)}</div><p className="image-disclaimer">Imagens ilustrativas. Dimensões e configuração final definidas conforme o projeto.</p><div className="catalog-treatment"><div><h3>Sua carga vai para o exterior?</h3><p>Consulte também o tratamento fitossanitário NIMF 15 / IPPC.</p></div><WhatsAppButton message="Olá! Gostaria de um orçamento de embalagens com tratamento fitossanitário NIMF 15 / IPPC para exportação.">Cotar para exportação</WhatsAppButton><ArrowUpRight className="hidden" /></div></section><QuoteBand /></main>;
+}
