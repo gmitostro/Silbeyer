@@ -2,17 +2,18 @@ import { Link, useRouterState } from '@tanstack/react-router';
 import { useState } from 'react';
 import { ArrowUpRight, ArrowRight, Phone, MapPin, Menu, X, MessageCircle, Box, Leaf, ShieldCheck, Ruler, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { contact, whatsappUrl, type Product } from '@/lib/silbeyer';
+import { contact, whatsappUrl, productQuoteMessage, type Product } from '@/lib/silbeyer';
+import logo from '@/assets/silbeyer-logo.png.asset.json';
 
 export function Brand({ inverse = false }: { inverse?: boolean }) {
-  return <Link to="/" aria-label="Silbeyer — início" className={`brand ${inverse ? 'brand-inverse' : ''}`}><span className="brand-mark"><Box strokeWidth={1.6} /></span><span><strong>Silbeyer<span className="brand-dot">.</span></strong><small>EMBALAGENS DE MADEIRA</small></span></Link>;
+  return <Link to="/" aria-label="Silbeyer — início" className={`brand ${inverse ? 'brand-inverse' : ''}`}><img className="brand-logo" src={logo.url} alt="Silbeyer Embalagens de Madeira" width={566} height={327} /></Link>;
 }
 
 export function WhatsAppButton({ children = 'Solicitar orçamento', message, className = '', outline = false }: { children?: React.ReactNode; message?: string; className?: string; outline?: boolean }) {
   return <Button asChild variant={outline ? 'outline' : 'default'} className={`quote-button ${className}`}><a href={whatsappUrl(message)} target="_blank" rel="noopener noreferrer"><MessageCircle size={18} />{children}<ArrowUpRight size={17} /></a></Button>;
 }
 
-const navigation = [{ to: '/', name: 'Início' }, { to: '/empresa', name: 'A Silbeyer' }, { to: '/produtos', name: 'Produtos' }, { to: '/tratamento', name: 'Tratamento NIMF 15' }, { to: '/contato', name: 'Contato' }] as const;
+const navigation = [{ to: '/', name: 'Início' }, { to: '/empresa', name: 'A Silbeyer' }, { to: '/produtos', name: 'Produtos' }, { to: '/solucoes', name: 'Sob medida' }, { to: '/tratamento', name: 'NIMF 15' }, { to: '/contato', name: 'Contato' }] as const;
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -29,7 +30,7 @@ export function FloatingWhatsApp() {
 }
 
 export function ProductCard({ product, label }: { product: Product; label?: string }) {
-  return <article className="product-card"><Link to="/produtos" className="product-image-link" aria-label={`Conhecer ${product.name}`}><img src={product.image} alt={product.name} width={1024} height={768} loading="lazy" />{label && <span className="product-label">{label}</span>}<span className="product-image-arrow"><ArrowUpRight size={19} /></span></Link><div className="product-info"><h3>{product.name}</h3><p>{product.short}</p><Button asChild variant="link" className="product-quote"><a href={whatsappUrl(`Olá! Vim pelo site da Silbeyer e gostaria de um orçamento para ${product.message}. Podemos conversar sobre medidas e quantidade?`)} target="_blank" rel="noopener noreferrer">Cotar este produto<ArrowUpRight size={16} /></a></Button></div></article>;
+  return <article className="product-card"><Link to="/produtos" className="product-image-link" aria-label={`Conhecer ${product.name}`}><img src={product.image} alt={`${product.name} — imagem ilustrativa`} width={1024} height={768} loading="lazy" />{label && <span className="product-label">{label}</span>}<span className="product-image-arrow"><ArrowUpRight size={19} /></span></Link><div className="product-info"><h3>{product.name}</h3><p>{product.short}</p><Button asChild variant="link" className="product-quote"><a href={whatsappUrl(productQuoteMessage(product))} target="_blank" rel="noopener noreferrer">Cotar pelo WhatsApp<ArrowUpRight size={16} /></a></Button></div></article>;
 }
 
 export function QuoteBand() {

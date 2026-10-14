@@ -16,13 +16,19 @@ export function whatsappUrl(message = 'Olá! Vim pelo site da Silbeyer e gostari
 }
 
 export const products = [
-  { id: 'caixas-macicas', category: 'Caixas', name: 'Caixas de madeira maciça', short: 'Proteção robusta para cargas que exigem segurança em cada etapa do transporte.', image: boxes, specs: ['Madeira maciça de reflorestamento', 'Dimensões sob medida', 'Mercado nacional e exportação'], message: 'caixas de madeira maciça' },
-  { id: 'caixas-compensado', category: 'Caixas', name: 'Caixas de compensado', short: 'Fechamento completo e versatilidade para proteger seus produtos e equipamentos.', image: boxes, specs: ['Painéis de compensado', 'Estrutura reforçada em madeira', 'Projeto conforme sua carga'], message: 'caixas de compensado' },
-  { id: 'pallets-duas', category: 'Pallets', name: 'Pallets de 2 entradas', short: 'Resistência e estabilidade para movimentar, armazenar e transportar sua carga.', image: pallets, specs: ['Acesso por duas entradas', 'Reforço invertido ou paralelo', 'Medidas conforme a operação'], message: 'pallets de 2 entradas com reforço invertido ou paralelo' },
-  { id: 'pallets-quatro', category: 'Pallets', name: 'Pallets de 4 entradas', short: 'Mais flexibilidade de movimentação para uma logística prática e eficiente.', image: pallets, specs: ['Acesso pelos quatro lados', 'Reforço invertido ou paralelo', 'Madeira de reflorestamento'], message: 'pallets de 4 entradas com reforço invertido ou paralelo' },
-  { id: 'engradados', category: 'Engradados', name: 'Engradados industriais', short: 'Estruturas sob medida para máquinas, equipamentos e cargas de grandes dimensões.', image: crates, specs: ['Estrutura de madeira reforçada', 'Projeto para cargas industriais', 'Dimensões personalizadas'], message: 'engradados industriais sob medida' },
+  { id: 'caixas-macicas', category: 'Caixas', name: 'Caixas de madeira maciça', short: 'Uma estrutura robusta para proteger sua carga durante o transporte e o armazenamento, com medidas definidas para o seu produto.', image: boxes, specs: ['Madeira maciça de reflorestamento', 'Projeto conforme dimensões e peso da carga', 'Opções para mercado nacional e exportação'], message: 'caixas de madeira maciça' },
+  { id: 'caixas-compensado', category: 'Caixas', name: 'Caixas de compensado', short: 'Fechamento em painéis para acondicionar produtos e equipamentos. A configuração acompanha as necessidades de proteção da sua operação.', image: boxes, specs: ['Fechamento em compensado', 'Estrutura em madeira', 'Dimensões definidas conforme o produto'], message: 'caixas de compensado' },
+  { id: 'pallets-duas', category: 'Pallets', name: 'Pallets de 2 entradas', short: 'Organize a movimentação e o armazenamento da carga com acesso por dois lados e uma configuração adequada à sua operação.', image: pallets, specs: ['Acesso por duas entradas', 'Reforço invertido ou paralelo', 'Medidas conforme carga e movimentação'], message: 'pallets de 2 entradas com reforço invertido ou paralelo' },
+  { id: 'pallets-quatro', category: 'Pallets', name: 'Pallets de 4 entradas', short: 'Acesso pelos quatro lados para dar mais flexibilidade à movimentação da carga e facilitar o posicionamento na sua rotina logística.', image: pallets, specs: ['Acesso pelos quatro lados', 'Reforço invertido ou paralelo', 'Dimensões conforme sua operação'], message: 'pallets de 4 entradas com reforço invertido ou paralelo' },
+  { id: 'engradados', category: 'Engradados', name: 'Engradados industriais', short: 'Acondicionamento sob medida para máquinas, equipamentos e cargas industriais, considerando o formato da peça e as etapas de transporte.', image: crates, specs: ['Estrutura de madeira', 'Projeto conforme a carga industrial', 'Dimensões personalizadas'], message: 'engradados industriais sob medida' },
 ];
 export type Product = (typeof products)[number];
+
+export const quoteOptions = [...products.map(product => product.name), 'Tratamento NIMF 15 / IPPC', 'Embalagem especial / projeto sob medida'];
+
+export function productQuoteMessage(product: Product) {
+  return `Olá! Vim pelo site da Silbeyer e gostaria de cotar ${product.message}.\nProduto a embalar: \nDimensões (C × L × A): \nPeso da carga: \nQuantidade: \nCidade de entrega: \nUso nacional ou exportação: \nPodem me ajudar a definir a embalagem?`;
+}
 
 export const featuredProducts = products
   .filter(product => ['caixas-macicas', 'pallets-duas', 'engradados'].includes(product.id))
@@ -32,6 +38,6 @@ export const featuredProducts = products
     return { ...product, label: 'PROJETOS SOB MEDIDA' };
   });
 
-export function pageHead(title: string, description: string) {
-  return { meta: [{ title }, { name: 'description', content: description }, { property: 'og:title', content: title }, { property: 'og:description', content: description }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary_large_image' }] };
+export function pageHead(title: string, description: string, path: string) {
+  return { meta: [{ title }, { name: 'description', content: description }, { property: 'og:title', content: title }, { property: 'og:description', content: description }, { property: 'og:type', content: 'website' }, { property: 'og:url', content: path }, { name: 'twitter:card', content: 'summary_large_image' }], links: [{ rel: 'canonical', href: path }] };
 }
