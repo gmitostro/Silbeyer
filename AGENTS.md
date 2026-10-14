@@ -14,3 +14,4 @@
 - Keep verified contacts, product definitions and encoded WhatsApp message links in the shared Silbeyer module to avoid divergent information across pages.
 - Product and contact quotations open WhatsApp directly; do not store lead data or imply a submission was received before the customer sends it there.
 - Give every content page its own Portuguese title and social metadata for clear search and sharing previews.
+- Keep quotation validation and WhatsApp preparation in the shared quote form, and derive product choices and quote messages from the shared product definitions so commercial information stays consistent.
