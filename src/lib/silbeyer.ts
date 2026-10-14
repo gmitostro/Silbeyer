@@ -24,11 +24,13 @@ export const products = [
 ];
 export type Product = (typeof products)[number];
 
-export const featuredProducts = [
-  { ...products[0], name: 'Caixas de madeira', short: 'Madeira maciça ou compensado. Proteção sob medida para o seu produto.', label: 'MACIÇA E COMPENSADO' },
-  { ...products[2], name: 'Pallets de madeira', short: '2 ou 4 entradas, com reforço invertido ou paralelo. Eficiência para sua logística.', label: '2 E 4 ENTRADAS' },
-  { ...products[4], label: 'PROJETOS SOB MEDIDA' },
-];
+export const featuredProducts = products
+  .filter(product => ['caixas-macicas', 'pallets-duas', 'engradados'].includes(product.id))
+  .map(product => {
+    if (product.id === 'caixas-macicas') return { ...product, name: 'Caixas de madeira', short: 'Madeira maciça ou compensado. Proteção sob medida para o seu produto.', label: 'MACIÇA E COMPENSADO' };
+    if (product.id === 'pallets-duas') return { ...product, name: 'Pallets de madeira', short: '2 ou 4 entradas, com reforço invertido ou paralelo. Eficiência para sua logística.', label: '2 E 4 ENTRADAS' };
+    return { ...product, label: 'PROJETOS SOB MEDIDA' };
+  });
 
 export function pageHead(title: string, description: string) {
   return { meta: [{ title }, { name: 'description', content: description }, { property: 'og:title', content: title }, { property: 'og:description', content: description }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary_large_image' }] };
