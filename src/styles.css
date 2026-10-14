@@ -203,6 +203,7 @@ a:focus-visible { outline: 2px solid var(--ring); outline-offset: 5px; }
 .hero-note { display: flex; align-items: center; gap: 8px; color: var(--on-dark-muted); font-size: 10px; margin-top: 28px; }
 .hero-note svg { color: var(--hero-accent); }
 .hero-side-note { position: absolute; right: 28px; top: 50%; writing-mode: vertical-rl; font-size: 8px; letter-spacing: 2px; color: var(--on-dark-muted); }
+.hero-photo-label { position: absolute; right: 25px; bottom: 14px; font-size: 9px; color: var(--on-dark); background: var(--brand-dark); padding: 4px 8px; }
 .benefits-band { background: var(--secondary); border-bottom: 1px solid var(--border); }
 .benefits-grid { display: grid; grid-template-columns: repeat(4,1fr); min-height: 102px; align-items: center; }
 .benefit { display: flex; align-items: center; gap: 13px; padding: 7px 24px; border-left: 1px solid var(--border); }

@@ -10,7 +10,7 @@ export const quoteSchema = z.object({
   company: optionalText(150),
   phone: z.string().trim().refine(value => value === '' || /^\+?[\d\s().-]+$/.test(value) && value.replace(/\D/g, '').length >= 10 && value.replace(/\D/g, '').length <= 15, 'Informe um telefone válido com DDD.'),
   email: z.union([z.literal(''), z.string().trim().email('Informe um e-mail válido.').max(254)]),
-  product: z.string().refine(value => quoteOptions.includes(value), 'Escolha um produto.'),
+  product: z.string({ required_error: 'Escolha um produto.' }).refine(value => quoteOptions.includes(value), 'Escolha um produto.'),
   dimensions: optionalText(100),
   quantity: optionalText(50),
   details: optionalText(1500),
