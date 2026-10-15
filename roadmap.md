@@ -11,5 +11,5 @@
 - [ ] Instalar sitemap após definir o endereço público desta nova versão; ainda não publicada.
 
 ## Refinamento visual da identidade original
-- [ ] Alinhar paleta, tipografia, cabeçalho e página inicial à logo original, sem alterar funcionalidades.
-- [ ] Verificar página inicial, navegação e WhatsApp em desktop e celular.
+- [x] Alinhar paleta, tipografia, cabeçalho e página inicial à logo original, sem alterar funcionalidades.
+- [x] Verificar página inicial, navegação e WhatsApp em desktop e celular.
