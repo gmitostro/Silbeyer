@@ -6,7 +6,7 @@ import { contact, whatsappUrl, productQuoteMessage, type Product } from '@/lib/s
 import logo from '@/assets/silbeyer-logo.png.asset.json';
 
 export function Brand({ inverse = false }: { inverse?: boolean }) {
-  return <Link to="/" aria-label="Silbeyer — início" className={`brand ${inverse ? 'brand-inverse' : ''}`}><img className="brand-logo" src={logo.url} alt="Silbeyer Embalagens de Madeira" width={566} height={327} /></Link>;
+  return <Link to="/" aria-label="Silbeyer — início" className={`brand ${inverse ? 'brand-inverse' : ''}`}><img className="brand-logo" src={logo.url} alt="Silbeyer Embalagens de Madeira" width={835} height={500} /></Link>;
 }
 
 export function WhatsAppButton({ children = 'Solicitar orçamento', message, className = '', outline = false }: { children?: React.ReactNode; message?: string; className?: string; outline?: boolean }) {
