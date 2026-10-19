@@ -4,8 +4,8 @@ import crates from '@/assets/crates.jpg';
 
 export const contact = {
   phone: '(11) 4661-3191',
-  whatsapp: '(11) 97411-8136',
-  whatsappNumber: '5511974118136',
+  whatsapp: '(11) 4661-3191',
+  whatsappNumber: '551146613191',
   emails: ['vendas@silbeyer.com.br', 'sac@silbeyer.com.br', 'silbeyer@silbeyer.com.br'],
   address: 'Rua Leonardo Scacciotti Neto, 150',
   neighborhood: 'Chácara Lídia Maria · Embu-Guaçu / SP',
