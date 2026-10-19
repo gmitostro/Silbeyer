@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { ArrowUpRight, ArrowRight, Phone, MapPin, Menu, X, MessageCircle, Box, Leaf, ShieldCheck, Ruler, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { contact, whatsappUrl, productQuoteMessage, type Product } from '@/lib/silbeyer';
-import logo from '@/assets/silbeyer-logo.png.asset.json';
+import logo from '@/assets/silbeyer-logo.png';
 
 export function Brand({ inverse = false }: { inverse?: boolean }) {
-  return <Link to="/" aria-label="Silbeyer — início" className={`brand ${inverse ? 'brand-inverse' : ''}`}><img className="brand-logo" src={logo.url} alt="Silbeyer Embalagens de Madeira" width={835} height={500} /></Link>;
+  return <Link to="/" aria-label="Silbeyer — início" className={`brand ${inverse ? 'brand-inverse' : ''}`}><img className="brand-logo" src={logo} alt="Silbeyer Embalagens de Madeira" width={835} height={500} /></Link>;
 }
 
 export function WhatsAppButton({ children = 'Solicitar orçamento', message, className = '', outline = false }: { children?: React.ReactNode; message?: string; className?: string; outline?: boolean }) {
