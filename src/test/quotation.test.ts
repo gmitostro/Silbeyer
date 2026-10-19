@@ -10,7 +10,7 @@ describe('Orçamento comercial', () => {
     for (const value of Object.values(data)) expect(message).toContain(value);
     const url = new URL(whatsappUrl(message));
     expect(url.hostname).toBe('wa.me');
-    expect(url.pathname).toBe('/5511974118136');
+    expect(url.pathname).toBe('/551146613191');
     expect(url.searchParams.get('text')).toBe(message);
   });
   it('recusa contatos inválidos e apresenta erro em português para produto ausente', () => {
